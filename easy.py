@@ -1,38 +1,61 @@
-# Все задачи текущего блока решите с помощью генераторов списков!
 
-# Задание-1:
-# Дан список, заполненный произвольными целыми числами.
-# Получить новый список, элементы которого будут
-# квадратами элементов исходного списка
-# [1, 2, 4, 0] --> [1, 4, 16, 0]
-
-a =  [i ** 2  for i in [1, 2, 4, 0]]
-print(a)
+# Задача-1:
+# Напишите скрипт, создающий директории dir_1 - dir_9 в папке,
+# из которой запущен данный скрипт.
+# И второй скрипт, удаляющий эти папки.
 
 
-# Задание-2:
-# Даны два списка фруктов.
-# Получить список фруктов, присутствующих в обоих исходных списках.
+import os
 
-a = ['apple','orange','milk','orangje']
-b = ['apple','orajnge']
+def create_dir (name):
+    try:
+        os.makedirs(name)
+    except OSError:
+		if not os.path.isdir(name):
+        print('{} - папка существует')
 
-c = [i  for i in a if i in b]
-print(c)
+name = ['dir_1','dir_2','dir_3','dir_4','dir_5','dir_6','dir_7','dir_8','dir_9']
+for i in range(len(name)):
+	create_dir(name[i])
+	
+	
+	
+import os
+
+def remove_dir (name):
+    try:
+        os.removedirs(name)
+    except FileNotFoundError:
+        print('{} - папки не существует')
+		
+		
+name_del = ['dir_1','dir_2','dir_3','dir_4','dir_5','dir_6','dir_7','dir_8','dir_9']
+for i in range(len(name_del)):
+	remove_dir(name_del[i])	
 
 
-# Задание-3:
-# Дан список, заполненный произвольными числами.
-# Получить список из элементов исходного, удовлетворяющих следующим условиям:
-# + Элемент кратен 3
-# + Элемент положительный
-# + Элемент не кратен 4
+	
 
 
 
-a = [2,5,14,10,5,2,3,9,16,-15,-9]
-b= []
-for i in range(len(a)):
-    if (a[i] % 3 == 0) and (a[i]>0) and (a[i] % 4 != 0) :
-        b.append(a[i])
-print(b)
+# Задача-2:
+# Напишите скрипт, отображающий папки текущей директории.
+
+import os.path
+listofdir = [f for f in os.listdir() if os.path.isdir(f)]
+print(listofdir)
+
+
+# Задача-3:
+# Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
+
+
+import os
+ 
+pathdir = os.path.abspath()
+if not os.path.exists(pathdir):
+    os.makedirs(pathdir) 
+dirname,filename = os.path.split(__file__)
+infile = open(__file__).read()
+open(os.path.join(pathdir,filename),'w').write(infile)
+
